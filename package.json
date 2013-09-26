@@ -1,0 +1,30 @@
+{
+  "name": "tmp-tmpl",
+  "version": "0.1.1",
+  "description": "A more specific template engine using stickit and backbone",
+  "main": "tmpl.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mwaylabs/tmpl.git"
+  },
+  "keywords": [
+    "stickit",
+    "template",
+    "backbone",
+    "underscore"
+  ],
+  "author": "mwaylabs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mwaylabs/tmpl/issues"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "lodash": "~2.1.0"
+  }
+}

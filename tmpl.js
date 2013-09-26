@@ -1,5 +1,8 @@
-_.mixin({
-    tmpl: function( text, data, settings ) {
+(function() {
+
+    var _ = _ || require('lodash');
+
+    function tmpl( text, data, settings ) {
         var render;
         var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g;
         var idCounter = 0;
@@ -41,32 +44,23 @@ _.mixin({
 
         // Compile the template source, escaping string literals appropriately.
         var index = 0;
-
-        //------ begin modifying the template function from underscore
-        //source is now an array that get joined at the end of the modification
         var source = [];
-        //every source += is now a push call
         source.push("__p+='");
 
-        //provide an api for setting the stickit attribute
-        //default data-binding
         var stickitAttribute = settings.stickitAttribute || 'data-binding';
 
         text.replace(matcher, function( match, escape, interpolate, evaluate, offset ) {
-
-            //split the underscore functionality into its single parts
             var sliced = text.slice(index, offset);
-            //if there is an attribute and the sliced part has an closing html tag '>' start the modification
-            if( interpolate && sliced.search(/>/gi) > -1 ) {
-                var qt = '>';
-                //the dom element could have attributes. so separate them from the closing '>'
-                var before = sliced.split(qt);
-                //add the stickit attribute to the dom element
-                //first add the stuff that was in front of the closing '>'
-                //then add the stickit attribute with the attribute key defined in the template string <%= interpolate %>
-                //finally close the tag '>'
-                sliced = before.join('') + ' ' + stickitAttribute + '="' + interpolate.trim() + '"' + qt;
-                //do underscore stuff again
+
+            if( interpolate && sliced.slice(-1) === '>' ) {
+                var before = sliced.slice(0, -1);
+                sliced = before + ' ' + stickitAttribute + '="' + interpolate.trim() + '"' + '>';
+                source.push(sliced.replace(escaper, function( match ) {
+                    return '\\' + escapes[match];
+                }));
+            } else if( interpolate && (sliced.slice(-7) === 'value="') ) {
+                var before = sliced.slice(0, -7);
+                sliced = before + stickitAttribute + '="' + interpolate.trim() + '" value="';
                 source.push(sliced.replace(escaper, function( match ) {
                     return '\\' + escapes[match];
                 }));
@@ -90,10 +84,7 @@ _.mixin({
             return match;
         });
         source.push("';\n");
-        //source should be a string like in underscore
         source = source.join('');
-
-        //------ end modifying
 
         // If a variable is not specified, place data values in local scope.
         if( !settings.variable ) {
@@ -120,5 +111,14 @@ _.mixin({
         template.source = 'function(' + (settings.variable || 'obj') + '){\n' + source + '}';
 
         return template;
+    };
+
+    if( _ && _.mixin ) {
+        _.mixin({
+            tmpl: tmpl
+        })
+    } else {
+        exports.tmpl = tmpl;
     }
-});
+
+})();
