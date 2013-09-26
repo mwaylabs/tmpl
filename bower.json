@@ -1,0 +1,27 @@
+{
+  "name": "tmpl",
+  "main": "tmpl.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mwaylabs/tmpl",
+  "authors": [
+    "mwaylabs"
+  ],
+  "description": "A more specific template engine using stickit and backbone",
+  "keywords": [
+    "template",
+    "underscore",
+    "template",
+    "stickit"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.5.2"
+  }
+}
