@@ -1,4 +1,4 @@
-(function() {
+(function(_) {
 
     var _ = _ || require('lodash');
 
@@ -121,4 +121,4 @@
         exports.tmpl = tmpl;
     }
 
-})();
+})(_);
