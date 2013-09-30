@@ -1,6 +1,6 @@
-(function(_) {
+(function(global) {
 
-    var _ = _ || require('lodash');
+    var _ = global._ || require('lodash');
 
     function tmpl( text, data, settings ) {
         var render;
@@ -121,4 +121,4 @@
         exports.tmpl = tmpl;
     }
 
-})(_);
+})(this);
