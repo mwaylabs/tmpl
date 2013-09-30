@@ -74,7 +74,7 @@
                 source.push("'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'");
             }
             if( interpolate ) {
-                source.push("'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'");
+                source.push("'+\n((__t=(typeof " + interpolate + "!== 'undefined' ? " + interpolate + " : ''))==null?'':__t)+\n'");
             }
             if( evaluate ) {
                 source.push("';\n" + evaluate + "\n__p+='");
