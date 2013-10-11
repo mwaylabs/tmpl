@@ -5,11 +5,6 @@
     function tmpl( text, data, settings ) {
         var render;
         var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g;
-        var idCounter = 0;
-        _.uniqueId = function( prefix ) {
-            var id = ++idCounter + '';
-            return prefix ? prefix + id : id;
-        };
 
         // By default, Underscore uses ERB-style template delimiters, change the
         // following template settings to use alternative delimiters.
