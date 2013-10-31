@@ -1,4 +1,12 @@
 .DS_Store
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+
+node_modules/
+npm-debug.log
 .idea
-bower_components
-node_modules
