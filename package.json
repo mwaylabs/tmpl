@@ -4,7 +4,7 @@
   "description": "A more specific template engine using stickit and backbone",
   "main": "tmpl.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,6 @@
 
   },
   "devDependencies": {
-    "lodash": "~2.1.0"
+    "lodash": "~2.2.1"
   }
 }
