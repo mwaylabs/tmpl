@@ -1,6 +1,6 @@
 {
   "name": "tmp-tmpl",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "A more specific template engine using stickit and backbone",
   "main": "tmpl.js",
   "scripts": {

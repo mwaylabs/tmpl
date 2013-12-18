@@ -43,19 +43,33 @@
         source.push("__p+='");
 
         var stickitAttribute = settings.stickitAttribute || 'data-binding';
+        if(typeof settings.useStickitAttribute === 'undefined'){
+            settings.useStickitAttribute = true;
+        }
 
         text.replace(matcher, function( match, escape, interpolate, evaluate, offset ) {
             var sliced = text.slice(index, offset);
 
+            var stickitAttributeDom = '';
+            if(settings.useStickitAttribute && interpolate){
+                stickitAttributeDom = stickitAttribute + '="' + interpolate.trim() + '"'
+            }
+
             if( interpolate && sliced.slice(-1) === '>' ) {
                 var before = sliced.slice(0, -1);
-                sliced = before + ' ' + stickitAttribute + '="' + interpolate.trim() + '"' + '>';
+                if(settings.useStickitAttribute){
+                    stickitAttributeDom = ' ' + stickitAttributeDom;
+                }
+                sliced = before + stickitAttributeDom + '>';
                 source.push(sliced.replace(escaper, function( match ) {
                     return '\\' + escapes[match];
                 }));
             } else if( interpolate && (sliced.slice(-7) === 'value="') ) {
                 var before = sliced.slice(0, -7);
-                sliced = before + stickitAttribute + '="' + interpolate.trim() + '" value="';
+                if(stickitAttributeDom){
+                    stickitAttributeDom = stickitAttributeDom + ' ';
+                }
+                sliced = before + stickitAttributeDom + 'value="';
                 source.push(sliced.replace(escaper, function( match ) {
                     return '\\' + escapes[match];
                 }));
